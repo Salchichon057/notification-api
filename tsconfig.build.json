@@ -13,7 +13,9 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "noImplicitAny": false,
-    "types": ["node"]
+    "noEmitOnError": false,
+    "types": [],
+    "typeRoots": []
   },
   "include": [
     "src/**/*"

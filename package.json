@@ -4,7 +4,7 @@
   "description": "API TypeScript para reemplazar la función notifyCitizensWhenTruckIsNear de Firebase Functions",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "npm install --production=false && tsc -p tsconfig.build.json",
     "build:clean": "npm run clean && tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
     "start:dev": "node dist/index.js",
