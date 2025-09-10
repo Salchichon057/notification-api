@@ -1,11 +1,15 @@
 {
   "name": "comaslimpio-notification-api",
   "version": "1.0.0",
-  "description": "API TypeScript para reemplazar la función notifyCitizensWhenTruckIsNear de Firebase Functions",
+  "description": "API TypeScript para notificaciones FCM del sistema ComasLimpio",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
-    "build": "npm install --production=false && tsc -p tsconfig.build.json",
-    "build:clean": "npm run clean && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
+    "build:clean": "npm run clean && npm run build",
     "start": "node dist/index.js",
     "start:dev": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
@@ -22,14 +26,13 @@
     "dotenv": "^16.6.1",
     "express": "^4.18.2",
     "firebase-admin": "^12.0.0",
-    "helmet": "^7.1.0",
-    "@types/node": "^20.19.10",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^4.17.23",
-    "typescript": "^5.9.2"
+    "helmet": "^7.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
     "@types/jest": "^29.5.14",
+    "@types/node": "^20.19.10",
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
@@ -41,6 +44,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
   }
 }

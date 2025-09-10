@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals';
+
 // Mock completo de Firebase Admin SDK
 const mockFirestore = {
     collection: jest.fn(() => ({
@@ -34,7 +36,7 @@ jest.mock('firebase-admin', () => ({
 }));
 
 // Mock de la función de inicialización
-jest.mock('../src/utils/firebase', () => ({
+jest.mock('../src/utils/firebase.ts', () => ({
     initializeFirebase: jest.fn(() => mockAdmin)
 }));
 
