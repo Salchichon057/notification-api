@@ -1,4 +1,5 @@
 import { validateCoordinates, getDistanceFromLatLonInMeters } from '../src/utils/geolocation';
+import { expect } from '@jest/globals';
 
 describe('NotificationService Basic Tests', () => {
     describe('Geolocation validation', () => {
