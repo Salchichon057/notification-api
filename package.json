@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "build:clean": "npm run clean && tsc",
     "start": "node dist/index.js",
     "start:dev": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
@@ -14,8 +15,7 @@
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "lint": "eslint src/ tests/",
     "lint:fix": "eslint src/ tests/ --fix",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "cors": "^2.8.5",
