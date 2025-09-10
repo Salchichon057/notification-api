@@ -1,17 +1,15 @@
-// Cargar variables de entorno primero
-import dotenv from 'dotenv';
-dotenv.config();
-
+// Cargar configuración de entorno
+import { config } from './config';
 import express from 'express';
 import cors from 'cors';
-import { NotificationController } from './controllers/NotificationController'; // Reactivado
+import { NotificationController } from './controllers/NotificationController';
 
 const app = express();
-const port = Number(process.env['PORT']) || 3000; // Volver a 3000
 
 console.log('🔧 Starting server initialization...');
-console.log(`🔧 Using port: ${port}`);
-console.log(`🔧 NODE_ENV: ${process.env['NODE_ENV']}`);
+console.log(`🔧 Environment: ${config.nodeEnv}`);
+console.log(`🔧 Using port: ${config.port}`);
+console.log(`🔧 Firebase Project: ${config.firebase.projectId}`);
 
 // Middleware
 console.log('🔧 Setting up CORS...');
@@ -183,7 +181,7 @@ app.post('/test-notification', async (req, res) => {
 });
 
 // Endpoint para prueba específica de Firebase Console
-app.post('/api/test-firebase-console', async (req, res) => {
+app.post('/api/test-firebase-console', async (_req, res) => {
     try {
         console.log('🔥 Testing Firebase Console notification visibility...');
 
@@ -349,11 +347,11 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 
 // Start server
 console.log('About to start server...');
-app.listen(port, '0.0.0.0', () => {
-    console.log(`🚀 Notification API running on port ${port}`);
-    console.log(`📍 Health check: http://localhost:${port}/health`);
-    console.log(`🔔 Update endpoint: http://localhost:${port}/api/update-truck-location`);
-    console.log(`🌐 Server listening on all interfaces (0.0.0.0:${port})`);
+app.listen(config.port, '0.0.0.0', () => {
+    console.log(`🚀 Notification API running on port ${config.port}`);
+    console.log(`📍 Health check: http://localhost:${config.port}/health`);
+    console.log(`🔔 Update endpoint: http://localhost:${config.port}/api/update-truck-location`);
+    console.log(`🌐 Server listening on all interfaces (0.0.0.0:${config.port})`);
 }).on('error', (err) => {
     console.error('❌ Server failed to start:', err);
 });

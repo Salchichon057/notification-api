@@ -1,24 +1,25 @@
 import { getDistanceFromLatLonInMeters, validateCoordinates } from '../utils/geolocation';
 import { FirebaseService } from './FirebaseService';
+import { config } from '../config';
 import { 
     LocationUpdateResponse, 
     ValidationResult,
     ProximityNotificationResult,
     NotificationResult,
     Location,
-    User,
-    FCMPayload
+    User
 } from '../types';
 
 export class NotificationService {
     private firebaseService: FirebaseService;
     private distanceThreshold: number;
+    // @ts-ignore: Used in throttle calculations
     private throttleMinutes: number;
 
     constructor() {
         this.firebaseService = new FirebaseService();
-        this.distanceThreshold = parseInt(process.env['NOTIFICATION_DISTANCE_THRESHOLD'] || '200');
-        this.throttleMinutes = parseInt(process.env['NOTIFICATION_THROTTLE_MINUTES'] || '3');
+        this.distanceThreshold = config.notification.distanceThreshold;
+        this.throttleMinutes = config.notification.throttleMinutes;
     }
 
     async processLocationUpdate(userId: string, locationData: { location: Location }): Promise<LocationUpdateResponse> {

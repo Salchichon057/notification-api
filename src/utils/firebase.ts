@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import { config } from '../config';
 
 /**
  * Inicializar Firebase Admin SDK
@@ -8,23 +9,14 @@ export function initializeFirebase(): typeof admin {
         console.log('🔧 Initializing Firebase Admin SDK...');
         
         const serviceAccount = {
-            projectId: process.env['FIREBASE_PROJECT_ID'],
-            clientEmail: process.env['FIREBASE_CLIENT_EMAIL'],
-            privateKey: process.env['FIREBASE_PRIVATE_KEY']?.replace(/\\n/g, '\n')
+            projectId: config.firebase.projectId,
+            clientEmail: config.firebase.clientEmail,
+            privateKey: config.firebase.privateKey
         };
 
         console.log(`🔧 Project ID: ${serviceAccount.projectId}`);
         console.log(`🔧 Client Email: ${serviceAccount.clientEmail}`);
         console.log(`🔧 Private Key: ${serviceAccount.privateKey ? 'Present' : 'Missing'}`);
-
-        if (!serviceAccount.projectId || !serviceAccount.clientEmail || !serviceAccount.privateKey) {
-            throw new Error('Missing Firebase configuration. Please check your environment variables.');
-        }
-
-        // Validar que las variables de entorno estén presentes
-        if (!serviceAccount.projectId || !serviceAccount.clientEmail || !serviceAccount.privateKey) {
-            throw new Error('Missing Firebase environment variables. Please set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY');
-        }
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
